@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Drug Comparison Tool – Compare Medicines by Class, Uses & Side Effects | AnkitStudyPoint</title>
+  <meta name="description" content="Free Drug Comparison Tool for D.Pharmacy students. Compare two drugs by drug class, mechanism of action, uses, side effects, and contraindications. Best pharmacy study tool by AnkitStudyPoint." />
+  <meta name="keywords" content="drug comparison tool, compare medicines, pharmacy tool, D.Pharmacy, drug class, side effects, mechanism of action, AnkitStudyPoint" />
+  <meta name="author" content="AnkitStudyPoint" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ankitstudypoint.blogspot.com/" />
+  <meta property="og:title" content="Drug Comparison Tool | AnkitStudyPoint" />
+  <meta property="og:description" content="Compare any two drugs side-by-side – uses, side effects, class and more. Free tool for D.Pharmacy students." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ankitstudypoint.blogspot.com/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Drug Comparison Tool",
+    "description": "Compare two drugs side by side by drug class, mechanism of action, therapeutic uses, side effects, and contraindications.",
+    "url": "https://ankitstudypoint.blogspot.com/",
+    "applicationCategory": "HealthApplication",
+    "author": { "@type": "Organization", "name": "AnkitStudyPoint", "url": "https://ankitstudypoint.blogspot.com/" }
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+    :root {
+      --bg: #0a0f1e;
+      --surface: #111827;
+      --card: #161f35;
+      --border: #1e2d4a;
+      --accent: #00d4ff;
+      --accent2: #7c3aed;
+      --accent3: #10b981;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --danger: #f43f5e;
+      --warning: #f59e0b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(0,212,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(124,58,237,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 32px 16px 60px; }
+
+    .site-header { text-align: center; margin-bottom: 36px; }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0 16px;
+    }
+
+    @media(max-width: 600px) { .search-grid { grid-template-columns: 1fr; } }
+
+    .drug-input-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: border-color 0.3s;
+      position: relative;
+    }
+
+    .drug-input-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+    }
+
+    .drug-input-box label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .drug-input-box input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      caret-color: var(--accent);
+    }
+
+    .drug-input-box input::placeholder { color: var(--muted); }
+
+    .suggestion-list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .suggestion-list.open { display: block; }
+
+    .suggestion-item {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .suggestion-item:last-child { border-bottom: none; }
+    .suggestion-item:hover { background: rgba(0,212,255,0.08); color: var(--accent); }
+
+    .compare-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      margin-bottom: 32px;
+    }
+
+    .compare-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,0.3); }
+    .compare-btn:active { transform: translateY(0); }
+
+    #result-section { display: none; }
+
+    .result-header {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+      margin-bottom: 1px;
+    }
+
+    .result-header > div {
+      background: var(--card);
+      padding: 14px 18px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .drug-a-head { color: var(--accent); text-align: center; }
+    .drug-b-head { color: var(--accent2); text-align: center; }
+    .label-head { color: var(--muted); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 1px;
+      animation: rowIn 0.4s ease both;
+    }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-row > div {
+      background: var(--card);
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .result-row:last-child { border-radius: 0 0 16px 16px; }
+    .result-row:last-child > div:first-child { border-radius: 0 0 0 16px; }
+    .result-row:last-child > div:last-child { border-radius: 0 0 16px 0; }
+
+    .row-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      padding-top: 14px;
+    }
+
+    .col-a { border-left: 2px solid var(--accent); }
+    .col-b { border-left: 2px solid var(--accent2); }
+
+    @media(max-width: 600px) {
+      .result-header, .result-row { grid-template-columns: 90px 1fr 1fr; }
+      .result-header > div, .result-row > div { padding: 8px 10px; font-size: 0.75rem; }
+    }
+
+    #loading { display: none; text-align: center; padding: 40px; }
+
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #error-msg {
+      display: none;
+      background: rgba(244,63,94,0.1);
+      border: 1px solid rgba(244,63,94,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .disclaimer {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      color: var(--warning);
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+
+    .internal-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 12px;
+    }
+
+    .link-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .link-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .seo-text {
+      margin-top: 48px;
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .seo-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent3);
+      margin: 16px 0 6px;
+    }
+
+    .seo-text p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+    .tag {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .copy-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--accent3);
+      border-radius: 8px;
+      color: var(--accent3);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover { background: rgba(16,185,129,0.1); }
+
+    .popular-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
+
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--muted);
+    }
+
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <header class="site-header">
+    <div class="brand-tag">🧪 AnkitStudyPoint · Pharmacy Tools</div>
+    <h1>Drug Comparison Tool</h1>
+    <p class="subtitle">Compare two drugs side-by-side — drug class, mechanism of action, therapeutic uses, side effects & contraindications. Free AI tool for D.Pharmacy students.</p>
+  </header>
+
+  <section aria-label="Popular drug comparisons">
+    <h2>⚡ Popular Comparisons</h2>
+    <div class="popular-chips">
+      <span class="chip" onclick="quickFill('Aspirin','Ibuprofen')">Aspirin vs Ibuprofen</span>
+      <span class="chip" onclick="quickFill('Amoxicillin','Ampicillin')">Amoxicillin vs Ampicillin</span>
+      <span class="chip" onclick="quickFill('Metformin','Glibenclamide')">Metformin vs Glibenclamide</span>
+      <span class="chip" onclick="quickFill('Atenolol','Amlodipine')">Atenolol vs Amlodipine</span>
+      <span class="chip" onclick="quickFill('Omeprazole','Ranitidine')">Omeprazole vs Ranitidine</span>
+      <span class="chip" onclick="quickFill('Paracetamol','Diclofenac')">Paracetamol vs Diclofenac</span>
+      <span class="chip" onclick="quickFill('Furosemide','Hydrochlorothiazide')">Furosemide vs HCTZ</span>
+      <span class="chip" onclick="quickFill('Warfarin','Heparin')">Warfarin vs Heparin</span>
+    </div>
+  </section>
+
+  <div class="search-grid">
+    <div class="drug-input-box" id="box-a">
+      <label>💊 Drug A</label>
+      <input type="text" id="drugA" placeholder="e.g. Aspirin" autocomplete="off" oninput="showSuggestions('A')" />
+      <div class="suggestion-list" id="sug-A"></div>
+    </div>
+    <div class="drug-input-box" id="box-b">
+      <label>💊 Drug B</label>
+      <input type="text" id="drugB" placeholder="e.g. Ibuprofen" autocomplete="off" oninput="showSuggestions('B')" />
+      <div class="suggestion-list" id="sug-B"></div>
+    </div>
+  </div>
+
+  <button class="compare-btn" onclick="compareDrugs()">🔬 Compare Drugs</button>
+
+  <div id="error-msg"></div>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <p style="color: var(--muted); font-size:0.9rem;">Analyzing drug data...</p>
+  </div>
+
+  <section id="result-section" aria-label="Drug comparison results">
+    <h2 id="result-title" style="margin-bottom:16px;font-size:1.2rem;color:#fff;"></h2>
+    <div class="result-header">
+      <div class="label-head">Parameter</div>
+      <div class="drug-a-head" id="head-a">Drug A</div>
+      <div class="drug-b-head" id="head-b">Drug B</div>
+    </div>
+    <div id="table-body"></div>
+    <button class="copy-btn" onclick="copyTable()">📋 Copy as Text</button>
+    <div class="disclaimer">⚠️ <strong>Educational Use Only:</strong> This tool is for D.Pharmacy exam preparation. Always consult a licensed pharmacist or physician before clinical use.</div>
+  </section>
+
+  <nav class="internal-links" aria-label="Other pharmacy tools on AnkitStudyPoint">
+    <h2>🔗 More Free Pharmacy Tools</h2>
+    <div class="links-grid">
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/p/bmi-calculator.html" target="_blank"><span>⚖️</span> BMI Calculator</a>
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/p/drug-dose-calculator.html" target="_blank"><span>💉</span> Drug Dose Calculator</a>
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/p/medical-abbreviation-finder-tool.html" target="_blank"><span>🔤</span> Abbreviation Finder</a>
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/p/free-ai-pharmacy-notes-generator.html" target="_blank"><span>🤖</span> Pharmacy Notes AI</a>
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/p/ai-assistant.html" target="_blank"><span>💬</span> AI Study Assistant</a>
+      <a class="link-card" href="https://ankitstudypoint.blogspot.com/" target="_blank"><span>🏠</span> AnkitStudyPoint Home</a>
+    </div>
+  </nav>
+
+  <article class="seo-text">
+    <h2>About This Drug Comparison Tool</h2>
+    <p>This free <strong>Drug Comparison Tool</strong> is specially designed for <strong>D.Pharmacy 1st and 2nd year students</strong> in India. Compare any two medicines instantly based on pharmacological class, mechanism of action, clinical uses, common side effects, and contraindications.</p>
+
+    <h3>How to Use the Drug Comparison Tool?</h3>
+    <p>Type the name of two drugs in the input boxes (e.g., Aspirin and Ibuprofen), then click "Compare Drugs". The AI-powered tool generates a detailed side-by-side comparison table instantly. You can also click the popular comparison chips for quick access.</p>
+
+    <h3>Why Compare Drugs for D.Pharmacy Exams?</h3>
+    <p>Drug comparison questions are very common in <strong>D.Pharmacy semester exams, Viva, and Government Pharmacist competitive exams</strong> like ESIC, Railway, and State Pharmacist exams. This tool helps you quickly revise key differences between similar drug classes.</p>
+
+    <h3>Disclaimer</h3>
+    <p>All information is generated for <strong>educational and exam preparation purposes only</strong>. This is not a clinical decision tool. Always refer to standard pharmacology textbooks (Tripathi, Rang & Dale) for detailed study.</p>
+
+    <div class="tag-list">
+      <span class="tag">D.Pharmacy Tool</span>
+      <span class="tag">Drug Comparison</span>
+      <span class="tag">Pharmacology</span>
+      <span class="tag">Free Pharmacy Tool</span>
+      <span class="tag">Exam Preparation</span>
+      <span class="tag">AnkitStudyPoint</span>
+      <span class="tag">Side Effects</span>
+      <span class="tag">Mechanism of Action</span>
+      <span class="tag">Government Pharmacist</span>
+    </div>
+  </article>
+
+</div>
+
+<script>
+  const drugList = [
+    "Aspirin","Ibuprofen","Paracetamol","Diclofenac","Naproxen","Indomethacin","Celecoxib",
+    "Amoxicillin","Ampicillin","Ciprofloxacin","Metronidazole","Azithromycin","Erythromycin",
+    "Tetracycline","Doxycycline","Clindamycin","Vancomycin","Ceftriaxone","Penicillin","Co-trimoxazole",
+    "Metformin","Glibenclamide","Insulin","Glipizide","Sitagliptin","Vildagliptin","Pioglitazone",
+    "Atenolol","Amlodipine","Enalapril","Lisinopril","Losartan","Valsartan","Nifedipine","Captopril",
+    "Omeprazole","Ranitidine","Pantoprazole","Esomeprazole","Famotidine","Sucralfate",
+    "Atorvastatin","Rosuvastatin","Simvastatin","Gemfibrozil","Fenofibrate",
+    "Salbutamol","Theophylline","Beclomethasone","Ipratropium","Montelukast",
+    "Morphine","Codeine","Tramadol","Fentanyl","Pentazocine",
+    "Diazepam","Alprazolam","Lorazepam","Clonazepam","Phenobarbitone","Phenytoin",
+    "Chlorpromazine","Haloperidol","Risperidone","Olanzapine","Clozapine",
+    "Warfarin","Heparin","Clopidogrel","Ticagrelor",
+    "Furosemide","Hydrochlorothiazide","Spironolactone","Mannitol","Acetazolamide",
+    "Digoxin","Amiodarone","Lidocaine","Propranolol","Adenosine",
+    "Chloroquine","Quinine","Artemether","Primaquine",
+    "Prednisolone","Dexamethasone","Hydrocortisone","Betamethasone",
+    "Adrenaline","Dopamine","Noradrenaline","Dobutamine"
+  ];
+
+  function showSuggestions(which) {
+    const input = document.getElementById('drug' + which);
+    const list = document.getElementById('sug-' + which);
+    const val = input.value.trim().toLowerCase();
+    if (val.length < 1) { list.classList.remove('open'); return; }
+    const matches = drugList.filter(d => d.toLowerCase().startsWith(val)).slice(0, 7);
+    if (!matches.length) { list.classList.remove('open'); return; }
+    list.innerHTML = matches.map(d =>
+      `<div class="suggestion-item" onclick="pickSuggestion('${which}','${d}')">${d}</div>`
+    ).join('');
+    list.classList.add('open');
+  }
+
+  function pickSuggestion(which, val) {
+    document.getElementById('drug' + which).value = val;
+    document.getElementById('sug-' + which).classList.remove('open');
+  }
+
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.suggestion-list').forEach(l => {
+      if (!l.parentElement.contains(e.target)) l.classList.remove('open');
+    });
+  });
+
+  function quickFill(a, b) {
+    document.getElementById('drugA').value = a;
+    document.getElementById('drugB').value = b;
+    document.getElementById('sug-A').classList.remove('open');
+    document.getElementById('sug-B').classList.remove('open');
+  }
+
+  async function compareDrugs() {
+    const drugA = document.getElementById('drugA').value.trim();
+    const drugB = document.getElementById('drugB').value.trim();
+    const errEl = document.getElementById('error-msg');
+    const loading = document.getElementById('loading');
+    const resultSection = document.getElementById('result-section');
+
+    errEl.style.display = 'none';
+    resultSection.style.display = 'none';
+
+    if (!drugA || !drugB) {
+      errEl.textContent = 'Please enter both drug names to compare.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    if (drugA.toLowerCase() === drugB.toLowerCase()) {
+      errEl.textContent = 'Please enter two different drug names.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    loading.style.display = 'block';
+
+    const prompt = `You are a pharmacy professor teaching D.Pharmacy students in India. Compare these two drugs.
+
+Drug A: ${drugA}
+Drug B: ${drugB}
+
+Return ONLY a valid JSON object (no markdown, no backticks, no extra text) with this exact structure:
+{
+  "drugA": "${drugA}",
+  "drugB": "${drugB}",
+  "rows": [
+    {"label": "Drug Class", "icon": "🏷️", "a": "...", "b": "..."},
+    {"label": "Mechanism of Action", "icon": "⚙️", "a": "...", "b": "..."},
+    {"label": "Therapeutic Uses", "icon": "💊", "a": "...", "b": "..."},
+    {"label": "Adult Dose", "icon": "📏", "a": "...", "b": "..."},
+    {"label": "Route", "icon": "🩺", "a": "...", "b": "..."},
+    {"label": "Side Effects", "icon": "⚠️", "a": "...", "b": "..."},
+    {"label": "Contraindications", "icon": "🚫", "a": "...", "b": "..."},
+    {"label": "Drug Interactions", "icon": "🔗", "a": "...", "b": "..."},
+    {"label": "Pregnancy Category", "icon": "🤰", "a": "...", "b": "..."},
+    {"label": "Key Difference", "icon": "🔑", "a": "...", "b": "..."}
+  ]
+}`;
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await res.json();
+      const raw = data.content[0].text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(raw);
+      renderResult(parsed);
+    } catch (e) {
+      errEl.textContent = 'Something went wrong. Please try again.';
+      errEl.style.display = 'block';
+    } finally {
+      loading.style.display = 'none';
+    }
+  }
+
+  function renderResult(data) {
+    document.getElementById('result-title').textContent = data.drugA + ' vs ' + data.drugB + ' — Comparison';
+    document.getElementById('head-a').textContent = data.drugA;
+    document.getElementById('head-b').textContent = data.drugB;
+
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '';
+
+    data.rows.forEach((row, i) => {
+      const div = document.createElement('div');
+      div.className = 'result-row';
+      div.style.animationDelay = (i * 0.06) + 's';
+      div.innerHTML =
+        '<div class="row-label"><span>' + row.icon + '</span>' + row.label + '</div>' +
+        '<div class="col-a">' + row.a + '</div>' +
+        '<div class="col-b">' + row.b + '</div>';
+      tbody.appendChild(div);
+    });
+
+    document.getElementById('result-section').style.display = 'block';
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyTable() {
+    const drugA = document.getElementById('head-a').textContent;
+    const drugB = document.getElementById('head-b').textContent;
+    const rows = document.querySelectorAll('.result-row');
+    let text = 'DRUG COMPARISON: ' + drugA + ' vs ' + drugB + '\n';
+    text += '='.repeat(50) + '\n\n';
+    rows.forEach(r => {
+      const cols = r.querySelectorAll('div');
+      text += cols[0].textContent.trim() + '\n';
+      text += '  ' + drugA + ': ' + cols[1].textContent.trim() + '\n';
+      text += '  ' + drugB + ': ' + cols[2].textContent.trim() + '\n\n';
+    });
+    text += '\nSource: AnkitStudyPoint.blogspot.com';
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy as Text', 2000);
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') compareDrugs();
+  });
+</script>
+
+</body>
+</html>
